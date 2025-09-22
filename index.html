@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeu des Magistrats</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>👑 Le Jeu des Magistrats</h1>
+
+  <div id="session">
+    <input type="text" id="sessionCode" placeholder="Code de session" />
+    <button onclick="joinSession()">Rejoindre</button>
+    <button onclick="createSession()">Créer une session</button>
+  </div>
+
+  <div id="roleSelection" class="hidden">
+    <h2>Choisissez votre rôle</h2>
+    <button onclick="selectRole('Consul')">Consul</button>
+    <button onclick="selectRole('Préteur')">Préteur</button>
+    <button onclick="selectRole('Édile')">Édile</button>
+    <button onclick="selectRole('Questeur')">Questeur</button>
+  </div>
+
+  <div id="mission" class="hidden"></div>
+
+  <script src="firebase.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
