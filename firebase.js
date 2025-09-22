@@ -1,4 +1,3 @@
-// Configuration Firebase (remplace avec tes vraies infos)
 const firebaseConfig = {
   apiKey: "AIzaSyDPCI_OHhZ2QMM71Ui7tW_1PTk6GepRCAA",
   authDomain: "magistrat-jeu.firebaseapp.com",
@@ -11,11 +10,4 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-
-// Initialisation de Firebase
-firebase.initializeApp(firebaseConfig);
-
-// Référence à la base de données
 const db = firebase.database();

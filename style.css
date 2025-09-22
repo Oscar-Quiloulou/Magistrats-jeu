@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+input, button, textarea {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+textarea {
+  width: 90%;
+  max-width: 600px;
+}
+
+#message {
+  background-color: #ffeeba;
+  border: 1px solid #f0ad4e;
+  color: #856404;
+  padding: 10px;
+  margin: 15px auto;
+  width: 80%;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}

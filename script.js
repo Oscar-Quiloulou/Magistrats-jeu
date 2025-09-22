@@ -3,7 +3,17 @@ let currentRole = '';
 let roleChosen = false;
 let isCreator = false;
 
-// Créer une session (le créateur devient Consul)
+// Affichage visuel des messages
+function showMessage(text) {
+  const msg = document.getElementById("message");
+  msg.innerText = text;
+  msg.classList.remove("hidden");
+  setTimeout(() => {
+    msg.classList.add("hidden");
+  }, 5000);
+}
+
+// Créer une session
 function createSession() {
   sessionCode = Math.random().toString(36).substring(2, 7).toUpperCase();
   isCreator = true;
@@ -19,16 +29,16 @@ function createSession() {
     }
   });
 
-  alert("Session créée : " + sessionCode + "\nTu es le Consul.");
+  showMessage("Session créée : " + sessionCode + " — Tu es le Consul.");
   document.getElementById("session").classList.add("hidden");
   showMission(currentRole);
 }
 
-// Rejoindre une session existante
+// Rejoindre une session
 function joinSession() {
   const codeInput = document.getElementById("sessionCode").value.toUpperCase();
   if (codeInput.length < 5) {
-    alert("Code invalide");
+    showMessage("Code invalide");
     return;
   }
 
@@ -38,21 +48,21 @@ function joinSession() {
       document.getElementById("session").classList.add("hidden");
       document.getElementById("roleSelection").classList.remove("hidden");
     } else {
-      alert("Session introuvable !");
+      showMessage("Session introuvable !");
     }
   });
 }
 
-// Choisir un rôle (une seule fois)
+// Choisir un rôle
 function selectRole(role) {
   if (roleChosen) {
-    alert("Tu as déjà choisi ton rôle !");
+    showMessage("Tu as déjà choisi ton rôle !");
     return;
   }
 
   db.ref(`sessions/${sessionCode}/roles/${role}`).once('value', snapshot => {
     if (snapshot.val() === true) {
-      alert("Ce rôle est déjà pris !");
+      showMessage("Ce rôle est déjà pris !");
     } else {
       db.ref(`sessions/${sessionCode}/roles/${role}`).set(true);
       currentRole = role;
@@ -63,7 +73,7 @@ function selectRole(role) {
   });
 }
 
-// Afficher la mission selon le rôle
+// Afficher la mission
 function showMission(role) {
   const missions = {
     "Consul": `
