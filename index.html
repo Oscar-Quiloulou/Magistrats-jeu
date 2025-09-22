@@ -4,17 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jeu des Magistrats</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <!-- Style -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>👑 Le Jeu des Magistrats</h1>
 
+  <!-- Bloc de session -->
   <div id="session">
     <input type="text" id="sessionCode" placeholder="Code de session" />
     <button onclick="joinSession()">Rejoindre</button>
     <button onclick="createSession()">Créer une session</button>
   </div>
 
+  <!-- Bloc de sélection des rôles -->
   <div id="roleSelection" class="hidden">
     <h2>Choisissez votre rôle</h2>
     <button onclick="selectRole('Consul')">Consul</button>
@@ -23,8 +31,10 @@
     <button onclick="selectRole('Questeur')">Questeur</button>
   </div>
 
+  <!-- Bloc de mission -->
   <div id="mission" class="hidden"></div>
 
+  <!-- Scripts -->
   <script src="firebase.js"></script>
   <script src="script.js"></script>
 </body>
