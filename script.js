@@ -52,17 +52,15 @@ function joinSession() {
   if (codeInput.length < 5) return showMessage("Code invalide");
 
   db.ref('sessions/' + codeInput).once('value', snapshot => {
-    if (snapshot.exists()) {
-      sessionCode = codeInput;
-      document.getElementById("session").classList.add("hidden");
-      document.getElementById("roleSelection").classList.remove("hidden");
-      document.getElementById("sessionDisplay").classList.remove("hidden");
-      document.getElementById("sessionCodeDisplay").innerText = sessionCode;
-      document.getElementById("chatContainer").classList.remove("hidden");
-      listenForMessages();
-    } else {
-      showMessage("Session introuvable !");
-    }
+    if (!snapshot.exists()) return showMessage("Session introuvable !");
+    
+    sessionCode = codeInput;
+    document.getElementById("session").classList.add("hidden");
+    document.getElementById("roleSelection").classList.remove("hidden");
+    document.getElementById("sessionDisplay").classList.remove("hidden");
+    document.getElementById("sessionCodeDisplay").innerText = sessionCode;
+    document.getElementById("chatContainer").classList.remove("hidden");
+    listenForMessages();
   });
 }
 
@@ -202,4 +200,11 @@ function loadRules() {
 
 function hideRules() {
   document.getElementById("rules").classList.add("hidden");
+}
+
+function deleteSession() {
+  if (!sessionCode) return showMessage("Aucune session active.");
+  db.ref('sessions/' + sessionCode).remove()
+    .then(() => showMessage("Session supprimée avec succès."))
+    .catch(() => showMessage("Erreur lors de la suppression."));
 }

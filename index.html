@@ -6,8 +6,8 @@
   <title>Jeu des Magistrats</title>
 
   <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js" defer></script>
 
   <!-- Style -->
   <link rel="stylesheet" href="style.css" />
@@ -25,6 +25,7 @@
   <!-- Code de session affiché -->
   <div id="sessionDisplay" class="hidden">
     <p>Code de session : <span id="sessionCodeDisplay"></span></p>
+    <button onclick="deleteSession()">🗑️ Supprimer la session</button>
   </div>
 
   <!-- Bloc de session -->
