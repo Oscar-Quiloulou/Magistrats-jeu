@@ -22,6 +22,19 @@
   <!-- Message visuel -->
   <div id="message" class="hidden"></div>
 
+  <!-- Bloc d'acceptation des conditions -->
+  <div id="consentBlock">
+    <h2>📘 Conditions d'utilisation</h2>
+    <div id="consentText">
+      <p><input type="checkbox" id="c1"> Je m'engage à ne pas utiliser de propos vulgaires.</p>
+      <p><input type="checkbox" id="c2"> Je respecterai les autres joueurs et leurs rôles.</p>
+      <p><input type="checkbox" id="c3"> Je supprimerai la session après usage.</p>
+      <p><input type="checkbox" id="c4"> Je ne partagerai pas d'informations personnelles.</p>
+      <p><input type="checkbox" id="c5"> J'ai lu et compris l'ensemble des règles du jeu.</p>
+    </div>
+    <button id="acceptBtn" onclick="acceptConditions()" disabled>✅ J'accepte les conditions</button>
+  </div>
+
   <!-- Code de session affiché -->
   <div id="sessionDisplay" class="hidden">
     <p>Code de session : <span id="sessionCodeDisplay"></span></p>
@@ -29,12 +42,13 @@
   </div>
 
   <!-- Bloc de session -->
-  <div id="session">
+  <div id="session" class="hidden">
     <input type="text" id="pseudo" placeholder="Ton pseudo" />
     <input type="text" id="sessionCode" placeholder="Code de session" />
     <button onclick="joinSession()">Rejoindre</button>
     <button onclick="createSession()">Créer une session</button>
     <button onclick="loadRules()">📘 Règles du jeu</button>
+    <button onclick="loadConditions()">📘 Conditions d'utilisation</button>
   </div>
 
   <!-- Bloc de sélection des rôles -->
@@ -68,6 +82,13 @@
     <h2>📘 Règles du Jeu</h2>
     <pre id="rulesContent"></pre>
     <button onclick="hideRules()">Fermer</button>
+  </div>
+
+  <!-- Conditions d'utilisation -->
+  <div id="conditions" class="hidden">
+    <h2>📘 Conditions d'utilisation</h2>
+    <pre id="conditionsContent"></pre>
+    <button onclick="hideConditions()">Fermer</button>
   </div>
 </body>
 </html>
