@@ -3,12 +3,15 @@ body {
   text-align: center;
   padding: 20px;
   background-color: #f9f9f9;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 input, button, textarea {
   margin: 10px;
   padding: 10px;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 button {
@@ -54,16 +57,17 @@ textarea {
 
 #chatContainer {
   position: fixed;
-  right: 0;
-  top: 80px;
+  bottom: 20px;
+  right: 20px;
   width: 300px;
-  height: 80vh;
+  max-height: 400px;
   background-color: #fff;
-  border-left: 2px solid #ccc;
+  border: 2px solid #ccc;
   padding: 10px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
 #chatBox {
@@ -73,6 +77,7 @@ textarea {
   padding: 5px;
   margin-bottom: 10px;
   background-color: #f8f8f8;
+  max-height: 250px;
 }
 
 #chatBox p {
@@ -81,8 +86,10 @@ textarea {
 }
 
 #chatInput {
-  width: calc(100% - 20px);
-  padding: 5px;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 8px;
+  font-size: 15px;
 }
 
 .hidden {
