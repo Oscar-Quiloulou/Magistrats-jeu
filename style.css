@@ -40,6 +40,51 @@ textarea {
   text-align: center;
 }
 
+#sessionDisplay {
+  background-color: #e2f0d9;
+  border: 1px solid #28a745;
+  color: #155724;
+  padding: 10px;
+  margin: 15px auto;
+  width: 80%;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#chatContainer {
+  position: fixed;
+  right: 0;
+  top: 80px;
+  width: 300px;
+  height: 80vh;
+  background-color: #fff;
+  border-left: 2px solid #ccc;
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#chatBox {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #f8f8f8;
+}
+
+#chatBox p {
+  margin: 5px 0;
+  text-align: left;
+}
+
+#chatInput {
+  width: calc(100% - 20px);
+  padding: 5px;
+}
+
 .hidden {
   display: none;
 }

@@ -22,8 +22,14 @@
   <!-- Message visuel -->
   <div id="message" class="hidden"></div>
 
+  <!-- Code de session affiché -->
+  <div id="sessionDisplay" class="hidden">
+    <p>Code de session : <span id="sessionCodeDisplay"></span></p>
+  </div>
+
   <!-- Bloc de session -->
   <div id="session">
+    <input type="text" id="pseudo" placeholder="Ton pseudo" />
     <input type="text" id="sessionCode" placeholder="Code de session" />
     <button onclick="joinSession()">Rejoindre</button>
     <button onclick="createSession()">Créer une session</button>
@@ -40,5 +46,13 @@
 
   <!-- Bloc de mission -->
   <div id="mission" class="hidden"></div>
+
+  <!-- Chat -->
+  <div id="chatContainer" class="hidden">
+    <h3>💬 Chat de la session</h3>
+    <div id="chatBox"></div>
+    <input type="text" id="chatInput" placeholder="Tape ton message..." />
+    <button onclick="sendMessage()">Envoyer</button>
+  </div>
 </body>
 </html>
