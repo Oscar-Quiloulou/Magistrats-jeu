@@ -17,10 +17,7 @@ function showMessage(text) {
 
 function createSession() {
   pseudo = document.getElementById("pseudo").value.trim();
-  if (pseudo === '') {
-    showMessage("Entre ton pseudo !");
-    return;
-  }
+  if (pseudo === '') return showMessage("Entre ton pseudo !");
   avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
   sessionCode = Math.random().toString(36).substring(2, 7).toUpperCase();
@@ -48,17 +45,11 @@ function createSession() {
 
 function joinSession() {
   pseudo = document.getElementById("pseudo").value.trim();
-  if (pseudo === '') {
-    showMessage("Entre ton pseudo !");
-    return;
-  }
+  if (pseudo === '') return showMessage("Entre ton pseudo !");
   avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
   const codeInput = document.getElementById("sessionCode").value.toUpperCase();
-  if (codeInput.length < 5) {
-    showMessage("Code invalide");
-    return;
-  }
+  if (codeInput.length < 5) return showMessage("Code invalide");
 
   db.ref('sessions/' + codeInput).once('value', snapshot => {
     if (snapshot.exists()) {
@@ -76,10 +67,7 @@ function joinSession() {
 }
 
 function selectRole(role) {
-  if (roleChosen) {
-    showMessage("Tu as déjà choisi ton rôle !");
-    return;
-  }
+  if (roleChosen) return showMessage("Tu as déjà choisi ton rôle !");
 
   db.ref(`sessions/${sessionCode}/roles/${role}`).once('value', snapshot => {
     if (snapshot.val() === true) {
@@ -96,54 +84,4 @@ function selectRole(role) {
 
 function showMission(role) {
   const missions = {
-    "Consul": `
-      <h2>👑 Consul</h2>
-      <p>Prépare un discours pour rassurer le peuple.</p>
-      <textarea placeholder="Écris ton discours ici..." rows="6" cols="50"></textarea>
-    `,
-    "Préteur": `
-      <h2>⚖️ Préteur</h2>
-      <p>Résous le conflit entre le citoyen romain et le marchand grec.</p>
-      <textarea placeholder="Décris ton enquête et ta solution..." rows="6" cols="50"></textarea>
-    `,
-    "Édile": `
-      <h2>🏗️ Édile</h2>
-      <p>Libère la voie Appienne bloquée par un chariot.</p>
-      <textarea placeholder="Décris ton plan logistique..." rows="6" cols="50"></textarea>
-    `,
-    "Questeur": `
-      <h2>💰 Questeur</h2>
-      <p>Propose une solution pour financer les fortifications.</p>
-      <textarea placeholder="Décris ta stratégie financière..." rows="6" cols="50"></textarea>
-    `
-  };
-
-  document.getElementById("mission").classList.remove("hidden");
-  document.getElementById("mission").innerHTML = missions[role];
-}
-
-function sendMessage() {
-  const input = document.getElementById("chatInput");
-  const message = input.value.trim();
-  if (message === '') return;
-
-  const timestamp = Date.now();
-  db.ref(`sessions/${sessionCode}/chat/${timestamp}`).set({
-    text: message,
-    pseudo: pseudo,
-    avatar: avatar
-  });
-
-  input.value = '';
-}
-
-function listenForMessages() {
-  const chatBox = document.getElementById("chatBox");
-  db.ref(`sessions/${sessionCode}/chat`).on('child_added', snapshot => {
-    const msg = snapshot.val();
-    const p = document.createElement("p");
-    p.innerHTML = `<strong>${msg.avatar} ${msg.pseudo} :</strong> ${msg.text}`;
-    chatBox.appendChild(p);
-    chatBox.scrollTop = chatBox.scrollHeight;
-  });
-}
+    "Consul": `<h2>👑 Consul
