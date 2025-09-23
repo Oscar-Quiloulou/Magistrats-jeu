@@ -15,6 +15,23 @@ function showMessage(text) {
   }, 5000);
 }
 
+function acceptConditions() {
+  document.getElementById("consentBlock").classList.add("hidden");
+  document.getElementById("session").classList.remove("hidden");
+}
+
+// Activer le bouton "J'accepte" seulement si toutes les cases sont cochées
+const checkboxes = ['c1', 'c2', 'c3', 'c4', 'c5'];
+checkboxes.forEach(id => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const box = document.getElementById(id);
+    box.addEventListener('change', () => {
+      const allChecked = checkboxes.every(cid => document.getElementById(cid).checked);
+      document.getElementById("acceptBtn").disabled = !allChecked;
+    });
+  });
+});
+
 function createSession() {
   pseudo = document.getElementById("pseudo").value.trim();
   if (pseudo === '') return showMessage("Entre ton pseudo !");
@@ -202,9 +219,22 @@ function hideRules() {
   document.getElementById("rules").classList.add("hidden");
 }
 
+function loadConditions() {
+  fetch('conditions.txt')
+    .then(response => response.text())
+    .then(text => {
+      document.getElementById("conditionsContent").textContent = text;
+      document.getElementById("conditions").classList.remove("hidden");
+    })
+    .catch(() => {
+      showMessage("Impossible de charger les conditions.");
+    });
+}
+
+function hideConditions() {
+  document.getElementById("conditions").classList.add("hidden");
+}
+
 function deleteSession() {
   if (!sessionCode) return showMessage("Aucune session active.");
-  db.ref('sessions/' + sessionCode).remove()
-    .then(() => showMessage("Session supprimée avec succès."))
-    .catch(() => showMessage("Erreur lors de la suppression."));
-}
+  db
