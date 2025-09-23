@@ -95,7 +95,6 @@ function selectRole(role) {
 }
 
 function showMission(role) {
-  function showMission(role) {
   const missions = {
     "Consul": `
       <h2>👑 Consul</h2>
@@ -123,7 +122,6 @@ function showMission(role) {
   document.getElementById("mission").innerHTML = missions[role];
 }
 
-// Envoyer un message dans le chat
 function sendMessage() {
   const input = document.getElementById("chatInput");
   const message = input.value.trim();
@@ -139,7 +137,6 @@ function sendMessage() {
   input.value = '';
 }
 
-// Écouter les nouveaux messages
 function listenForMessages() {
   const chatBox = document.getElementById("chatBox");
   db.ref(`sessions/${sessionCode}/chat`).on('child_added', snapshot => {
