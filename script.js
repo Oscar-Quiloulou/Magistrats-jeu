@@ -238,3 +238,4 @@ function hideConditions() {
 function deleteSession() {
   if (!sessionCode) return showMessage("Aucune session active.");
   db
+}
