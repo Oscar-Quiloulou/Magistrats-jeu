@@ -1,0 +1,11 @@
+📘 Règles du Jeu des Magistrats
+
+Chaque joueur incarne un magistrat romain avec une mission spécifique :
+
+- Consul : rassurer le peuple par un discours.
+- Préteur : résoudre un conflit juridique.
+- Édile : gérer un problème logistique dans la ville.
+- Questeur : proposer une solution financière.
+
+Les joueurs peuvent discuter via le chat, puis soumettre leur mission.
+Le rapport final rassemble toutes les contributions.

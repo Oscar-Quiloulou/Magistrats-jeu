@@ -19,19 +19,24 @@
 <body>
   <h1>👑 Le Jeu des Magistrats</h1>
 
+  <!-- Message visuel -->
   <div id="message" class="hidden"></div>
 
+  <!-- Code de session affiché -->
   <div id="sessionDisplay" class="hidden">
     <p>Code de session : <span id="sessionCodeDisplay"></span></p>
   </div>
 
+  <!-- Bloc de session -->
   <div id="session">
     <input type="text" id="pseudo" placeholder="Ton pseudo" />
     <input type="text" id="sessionCode" placeholder="Code de session" />
     <button onclick="joinSession()">Rejoindre</button>
     <button onclick="createSession()">Créer une session</button>
+    <button onclick="loadRules()">📘 Règles du jeu</button>
   </div>
 
+  <!-- Bloc de sélection des rôles -->
   <div id="roleSelection" class="hidden">
     <h2>Choisissez votre rôle</h2>
     <button onclick="selectRole('Consul')">Consul</button>
@@ -40,18 +45,28 @@
     <button onclick="selectRole('Questeur')">Questeur</button>
   </div>
 
+  <!-- Bloc de mission -->
   <div id="mission" class="hidden"></div>
 
+  <!-- Rapport final -->
   <div id="report" class="hidden">
     <h2>📜 Rapport final de la session</h2>
     <div id="reportContent"></div>
   </div>
 
+  <!-- Chat -->
   <div id="chatContainer" class="hidden">
     <h3>💬 Chat de la session</h3>
     <div id="chatBox"></div>
     <input type="text" id="chatInput" placeholder="Tape ton message..." />
     <button onclick="sendMessage()">Envoyer</button>
+  </div>
+
+  <!-- Règles du jeu -->
+  <div id="rules" class="hidden">
+    <h2>📘 Règles du Jeu</h2>
+    <pre id="rulesContent"></pre>
+    <button onclick="hideRules()">Fermer</button>
   </div>
 </body>
 </html>

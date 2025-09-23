@@ -84,4 +84,122 @@ function selectRole(role) {
 
 function showMission(role) {
   const missions = {
-    "Consul": `<h2>👑 Consul
+    "Consul": `
+      <h2>👑 Consul</h2>
+      <p>Prépare un discours pour rassurer le peuple.</p>
+      <textarea placeholder="Écris ton discours ici..." rows="6" cols="50"></textarea>
+      <button onclick="submitMission()">Soumettre ma mission</button>
+      <button onclick="viewReport()">Voir le rapport final</button>
+    `,
+    "Préteur": `
+      <h2>⚖️ Préteur</h2>
+      <p>Résous le conflit entre le citoyen romain et le marchand grec.</p>
+      <textarea placeholder="Décris ton enquête et ta solution..." rows="6" cols="50"></textarea>
+      <button onclick="submitMission()">Soumettre ma mission</button>
+      <button onclick="viewReport()">Voir le rapport final</button>
+    `,
+    "Édile": `
+      <h2>🏗️ Édile</h2>
+      <p>Libère la voie Appienne bloquée par un chariot.</p>
+      <textarea placeholder="Décris ton plan logistique..." rows="6" cols="50"></textarea>
+      <button onclick="submitMission()">Soumettre ma mission</button>
+      <button onclick="viewReport()">Voir le rapport final</button>
+    `,
+    "Questeur": `
+      <h2>💰 Questeur</h2>
+      <p>Propose une solution pour financer les fortifications.</p>
+      <textarea placeholder="Décris ta stratégie financière..." rows="6" cols="50"></textarea>
+      <button onclick="submitMission()">Soumettre ma mission</button>
+      <button onclick="viewReport()">Voir le rapport final</button>
+    `
+  };
+
+  document.getElementById("mission").classList.remove("hidden");
+  document.getElementById("mission").innerHTML = missions[role];
+}
+
+function submitMission() {
+  const content = document.querySelector("#mission textarea").value.trim();
+  if (content === '') {
+    showMessage("Ta mission est vide !");
+    return;
+  }
+
+  db.ref(`sessions/${sessionCode}/report/${pseudo}`).set({
+    role: currentRole,
+    avatar: avatar,
+    text: content
+  });
+
+  showMessage("Mission enregistrée !");
+}
+
+function viewReport() {
+  const reportDiv = document.getElementById("report");
+  const reportContent = document.getElementById("reportContent");
+  reportContent.innerHTML = '';
+  reportDiv.classList.remove("hidden");
+
+  db.ref(`sessions/${sessionCode}/report`).once('value', snapshot => {
+    const data = snapshot.val();
+    if (!data) {
+      reportContent.innerHTML = "<p>Aucune mission soumise pour l'instant.</p>";
+      return;
+    }
+
+    for (const player in data) {
+      const entry = data[player];
+      const block = document.createElement("div");
+      block.style.border = "1px solid #ccc";
+      block.style.margin = "10px";
+      block.style.padding = "10px";
+      block.innerHTML = `
+        <strong>${entry.avatar} ${player} (${entry.role})</strong><br/>
+        <p>${entry.text}</p>
+      `;
+      reportContent.appendChild(block);
+    }
+  });
+}
+
+function sendMessage() {
+  const input = document.getElementById("chatInput");
+  const message = input.value.trim();
+  if (message === '') return;
+
+  const timestamp = Date.now();
+  db.ref(`sessions/${sessionCode}/chat/${timestamp}`).set({
+    text: message,
+    pseudo: pseudo,
+    avatar: avatar
+  });
+
+  input.value = '';
+}
+
+function listenForMessages() {
+  const chatBox = document.getElementById("chatBox");
+  db.ref(`sessions/${sessionCode}/chat`).on('child_added', snapshot => {
+    const msg = snapshot.val();
+    const p = document.createElement("p");
+    p.innerHTML = `<strong>${msg.avatar} ${msg.pseudo} :</strong> ${msg.text}`;
+    chatBox.appendChild(p);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
+}
+
+function loadRules() {
+  fetch('regles.txt')
+    .then(response => response.text())
+    .then(text => {
+      document.getElementById("rulesContent").textContent = text;
+      document.getElementById("rules").classList.remove("hidden");
+    })
+    .catch(() => {
+      showMessage("Impossible de charger les règles.");
+    });
+}
+
+function hideRules() {
+  document.getElementById("rules").classList.add("hidden");
+}
